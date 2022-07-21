@@ -7,7 +7,7 @@
 
 variables:
   # The full path to the folder containing the project.json file for this pipeline
-  projectPath: UiPath-Azure-Devops/project.json
+  projectPath: project.json
   # The name of the folder to deploy the package to.
   folderName: Shared
   # Either AutoVersion to generate a build number or CurrentVersion to match the project.json version.
