@@ -92,7 +92,7 @@ stages:
           steps:
           - download: current
             artifact: drop
-          - task: UiPathInstallPlatform-preview@2  # This installs required exes. Not necessary if using a dedicated build machine.
+          - task: UiPathInstallPlatform@2  # This installs required exes. Not necessary if using a dedicated build machine.
           - task: UiPathDeploy@2
             inputs:
               orchestratorConnection: Orchestrator-Prod-Default  # Update this to a service connection for your Prod Orchestrator.
