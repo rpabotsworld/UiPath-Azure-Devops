@@ -7,7 +7,7 @@
 
 variables:
   # The full path to the folder containing the project.json file for this pipeline
-  projectPath: MyProject
+  projectPath: UiPath-Azure-Devops
   # The name of the folder to deploy the package to.
   folderName: Default
   # Either AutoVersion to generate a build number or CurrentVersion to match the project.json version.
@@ -30,7 +30,7 @@ trigger:
   # so that any change to the project will trigger the pipeline, but it will ignore any changes to other projects.
   paths:
     include:
-      - MyProject/*  # Update this
+      - UiPath-Azure-Devops/*  # Update this
 
 # This points to the repository containing the templates. Update this to point to your template repository.
 resources:
