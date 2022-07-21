@@ -24,17 +24,13 @@ parameters:
 - name: 'environments'
   default: ''
   type: string
+# The name of the testSet to be executed 
+- name: 'testSet'
+  default: 'Azure.Devops_Tests'
+  type: string
   
 # This pipeline is broken into stages for the approval functionality. Stages are ran independantly, which means the pipeline can pause until the approval is received. 
 stages:
-
-
-
-
-
-
-
-
 # Build the nuget package.
 - stage: Build
   jobs:
@@ -60,7 +56,7 @@ stages:
 # Note that this stage has no environment defined, and won't have approvals.
 # For Test environment approvals, update this to look like the Prod stage, but with using the Test environment.
 - stage: DeployToTest
-  condition: and(succeeded('Build'), startsWith(variables['Build.SourceBranchName'], 'release'))  # Only run if the packaging succeeded and we are on a release* branch.
+  condition: and(succeeded('Build'), startsWith(variables['Build.SourceBranchName'], 'development'))  # Only run if the packaging succeeded and we are on a development* branch.
   jobs:
   - job: DeployToTestJob
     pool: Default  # Update this if using dedicated build pool
@@ -77,8 +73,34 @@ stages:
         folderName: ${{ parameters.folderName }}
         environments: ${{ parameters.environments }}
 
+- stage: Assest
+  displayName: Create Assests
+  jobs:
+    - job: CreateAssests
+      pool: Default  # Update this if using dedicated build pool
+      steps:
+      - task: UiPathAssets@2
+        inputs:
+          orchestratorConnection: Orchestrator-Dev-Default
+          folderName: ${{ parameters.folderName }}
+          assetActionType: 'Deploy'
+          csvFile: '$(Build.SourcesDirectory)\Data\Assests.csv'
 
-
+- stage: Testing
+  displayName:  Test After Publish
+  dependsOn: DeployToTest
+  condition: succeeded()
+  jobs:
+    - job: TestDEV
+      pool: Default
+      steps:
+        - task: UiPathTest@2
+          inputs:
+            testTarget: 'TestSet'
+            orchestratorConnection: Orchestrator-Dev-Default
+            testSet: ${{ parameters.testSet }}
+            folderName: ${{ parameters.folderName }}
+            testReportDestination: '$(Pipeline.Workspace)\drop\'
 
 
 # Deploy to the Prod environment on commits to the master branch.
