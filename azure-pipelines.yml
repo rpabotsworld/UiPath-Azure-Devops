@@ -37,7 +37,7 @@ resources:
   repositories:
     - repository: templates
       type: github  # use 'git' for a repo hosted in Azure DevOps
-      endpoint: my-github-service-connection
+      endpoint: rpabotsworld
       name: rpabotsworld/UiPath-Azure-Devops
 
 # Use the specified template. 
