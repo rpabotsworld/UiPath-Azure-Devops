@@ -66,7 +66,7 @@ stages:
     - task: UiPathInstallPlatform@2  # This installs required exes. Not necessary if using a dedicated build machine.
     - task: UiPathDeploy@2
       inputs:
-        orchestratorConnection: Orchestrator-Test-Default
+        orchestratorConnection: Orchestrator-Dev-Default
         packagesPath: '$(Pipeline.Workspace)\drop'
         folderName: ${{ parameters.folderName }}
         environments: ${{ parameters.environments }}
@@ -95,7 +95,7 @@ stages:
           - task: UiPathInstallPlatform@2  # This installs required exes. Not necessary if using a dedicated build machine.
           - task: UiPathDeploy@2
             inputs:
-              orchestratorConnection: Orchestrator-Prod-Default  # Update this to a service connection for your Prod Orchestrator.
+              orchestratorConnection: Orchestrator-Dev-Default  # Update this to a service connection for your Prod Orchestrator.
               packagesPath: '$(Pipeline.Workspace)\drop'
               folderName: ${{ parameters.folderName }}
               environments: ${{ parameters.environments }}
