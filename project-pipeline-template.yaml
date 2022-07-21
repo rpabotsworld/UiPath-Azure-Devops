@@ -38,7 +38,7 @@ stages:
     steps:
     - script: 'echo project path: ${{ parameters.projectPath }}, folder name: ${{ parameters.folderName }}, versioning strategy: ${{ parameters.versioningStrategy }}, environments: ${{ parameters.environments }}'
       displayName: Log parameters
-    - task: UiPathInstallPlatform-preview@2  # This installs required exes. Not necessary if using a dedicated build machine.
+    - task: UiPathInstallPlatform@2  # This installs required exes. Not necessary if using a dedicated build machine.
     - task: UiPathPack@2
       inputs:
         versionType: ${{ parameters.versioningStrategy }}
@@ -63,7 +63,7 @@ stages:
     steps:
     - download: current
       artifact: drop
-    - task: UiPathInstallPlatform-preview@2  # This installs required exes. Not necessary if using a dedicated build machine.
+    - task: UiPathInstallPlatform@2  # This installs required exes. Not necessary if using a dedicated build machine.
     - task: UiPathDeploy@2
       inputs:
         orchestratorConnection: Orchestrator-Test-Default
@@ -73,7 +73,7 @@ stages:
 
 
 
-        
+
 
 # Deploy to the Prod environment on commits to the master branch.
 # Will require approvals as defined by the environment in Azure Devops.
