@@ -27,6 +27,14 @@ parameters:
   
 # This pipeline is broken into stages for the approval functionality. Stages are ran independantly, which means the pipeline can pause until the approval is received. 
 stages:
+
+
+
+
+
+
+
+
 # Build the nuget package.
 - stage: Build
   jobs:
