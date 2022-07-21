@@ -39,8 +39,7 @@ stages:
 - stage: Build
   jobs:
   - job: BuildJob
-    pool:  # Update this if using dedicated build pool
-      vmImage: 'windows-latest'
+    pool:  Default # Update this if using dedicated build pool
     workspace:
       clean: all
     steps:
@@ -64,8 +63,7 @@ stages:
   condition: and(succeeded('Build'), startsWith(variables['Build.SourceBranchName'], 'release'))  # Only run if the packaging succeeded and we are on a release* branch.
   jobs:
   - job: DeployToTestJob
-    pool:  # Update this if using dedicated build pool
-      vmImage: 'windows-latest'
+    pool: Default  # Update this if using dedicated build pool
     workspace:
       clean: all
     steps:
