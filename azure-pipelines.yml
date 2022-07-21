@@ -7,13 +7,13 @@
 
 variables:
   # The full path to the folder containing the project.json file for this pipeline
-  projectPath: UiPath-Azure-Devops
+  projectPath: Azure Devops
   # The name of the folder to deploy the package to.
-  folderName: Default
+  folderName: Shared
   # Either AutoVersion to generate a build number or CurrentVersion to match the project.json version.
   versioningStrategy: CurrentVersion
   # The orchestrator tenant to deploy to. Not used, but may be useful if deploying to multiple tenants.
-  tenant: Default
+  tenant: DEV
   # The environments to update the package version to the deployed version. 
   # Not required for modern folders or if you do not want to update the package version.
   environments: ''
@@ -30,7 +30,7 @@ trigger:
   # so that any change to the project will trigger the pipeline, but it will ignore any changes to other projects.
   paths:
     include:
-      - UiPath-Azure-Devops/*  # Update this
+      - Azure Devops/*  # Update this
 
 # This points to the repository containing the templates. Update this to point to your template repository.
 resources:
