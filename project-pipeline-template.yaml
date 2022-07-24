@@ -84,7 +84,7 @@ stages:
           orchestratorConnection: Orchestrator-Dev-Default
           folderName: ${{ parameters.folderName }}
           assetActionType: 'Deploy'
-          csvFile: '$(Build.SourcesDirectory)\Data\Assests.csv'
+          csvFile: '$(Build.SourcesDirectory)\Data\Assests.CSV'
 
 - stage: Testing
   displayName:  Test After Publish

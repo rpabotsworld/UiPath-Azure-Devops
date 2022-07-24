@@ -11,7 +11,7 @@ variables:
   # The name of the folder to deploy the package to.
   folderName: Shared
   # Either AutoVersion to generate a build number or CurrentVersion to match the project.json version.
-  versioningStrategy: CurrentVersion
+  versioningStrategy: AutoVersion
   # The orchestrator tenant to deploy to. Not used, but may be useful if deploying to multiple tenants.
   tenant: DEV
   # The environments to update the package version to the deployed version. 
@@ -26,7 +26,7 @@ trigger:
     include:
       - master    # Will push to Prod after approval
       - development # Will push to DEV without approval
-      - release*  # Will push to Test without approval
+      - release*  # Will push to UAT without approval
   # Define what paths to include for building this pipeline. Normally, you should add the same projectPath as above,
   # so that any change to the project will trigger the pipeline, but it will ignore any changes to other projects.
   paths:
