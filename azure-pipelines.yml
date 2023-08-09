@@ -11,7 +11,7 @@ variables:
   # The name of the folder to deploy the package to.
   folderName: Shared
   # Either AutoVersion to generate a build number or CurrentVersion to match the project.json version.
-  versioningStrategy: CurrentVersion
+  versioningStrategy: AutoVersion
   # The orchestrator tenant to deploy to. Not used, but may be useful if deploying to multiple tenants.
   tenant: DEV
   # The environments to update the package version to the deployed version. 
@@ -25,22 +25,23 @@ trigger:
   branches:
     include:
       - master    # Will push to Prod after approval
-      - release*  # Will push to Test without approval
+      - development # Will push to DEV without approval
+      - release*  # Will push to UAT without approval
   # Define what paths to include for building this pipeline. Normally, you should add the same projectPath as above,
   # so that any change to the project will trigger the pipeline, but it will ignore any changes to other projects.
   paths:
     include:
-      - UiPath-Azure-Devops/*  # Update this
+      - '*' # same as '/' for the repository root
 
-# This points to the repository containing the templates. Update this to point to your template repository.
+# This points to the repository containing the templates. Update this to point to your template repository. Using the Concept of DRY.
 resources:
   repositories:
     - repository: templates
       type: github  # use 'git' for a repo hosted in Azure DevOps
       endpoint: rpabotsworld
-      name: rpabotsworld/UiPath-Azure-Devops
+      name: rpabotsworld/UiPath-Azure-Devops 
 
-# Use the specified template. 
+# Use the above specified template for your project. 
 extends:
   template: project-pipeline-template.yaml@templates  # Template reference
   parameters:
