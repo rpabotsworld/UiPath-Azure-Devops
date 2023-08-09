@@ -26,7 +26,7 @@ parameters:
   type: string
 # The name of the testSet to be executed 
 - name: 'testSet'
-  default: 'Azure.Devops_Tests'
+  default: 'Azure.Devops.2023_Tests'
   type: string
   
 # This pipeline is broken into stages for the approval functionality. Stages are ran independantly, which means the pipeline can pause until the approval is received. 
